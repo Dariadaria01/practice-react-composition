@@ -5,20 +5,24 @@ import List from './List';
 import Form from './Form';
 
 class App extends React.Component {
-    state = {
-        usersList: [],
-    }
+  state = {
+    usersList: [],
+  };
+  addUser = (user) => {
+    this.setState((prevState) => ({
+      usersList: [...prevState.usersList, user],
+    }));
+  };
+  render() {
+    const { usersList } = this.state;
 
-    render() {
-        const  { usersList } = this.state;
-
-        return (
-            <section>
-                <Form />
-                <List items={ usersList } />
-            </section>
-        )
-    }
+    return (
+      <section>
+        <Form addUser={this.addUser} />
+        <List items={usersList} />
+      </section>
+    );
+  }
 }
 
 const root = createRoot(document.querySelector('#root'));
